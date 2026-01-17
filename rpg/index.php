@@ -5,7 +5,7 @@ require_once 'guerreiro.php';
 require_once 'mago.php';
 
 $thor = new Guerreiro("Thor", 12000);
-$merlin = new Mago("Merlin", 9000);
+$merlin = new Mago("Merlin", 9000, 10000);
 
 $thor->gritoDeGuerra();
 echo "<br>";
@@ -22,4 +22,9 @@ echo "<br>";
 $merlin->receberDano(3500);
 echo "<br>";
 echo $merlin->getVida();
+
+
+
+
+$testeErro = new Personagem("ERRO", 100);
 

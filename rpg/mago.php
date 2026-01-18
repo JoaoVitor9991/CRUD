@@ -1,6 +1,6 @@
 <?php
 
-class Mago extends Personagem {
+class Mago extends Personagem implements Atacante {
     private $mana;
 
     public function soltarPoder(){
@@ -21,5 +21,10 @@ class Mago extends Personagem {
     public function getMana()
     {
         return $this->mana;
+    }
+
+    public function atacar()
+    {
+        echo $this->getNome() . " Lança um raio de energia! ";
     }
 }

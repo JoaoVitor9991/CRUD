@@ -1,37 +1,26 @@
 <?php
+require 'conexao.php';
 
-require_once 'conexao.php';
-
-$nome = 'Merlin';
-$vida = 10000;
-$mana = 10000;
-$classe = 'Mago';
+// 1. Receber os dados que vieram do Formulário (pelo método POST)
+// Atenção: Os nomes dentro dos colchetes [''] devem ser IGUAIS aos 'name' do formulário
+$nome = $_POST['nome_digitado'];
+$classe = $_POST['classe_escolhida'];
+$vida = $_POST['vida_digitada'];
+$mana = $_POST['mana_digitada'];
 
 try {
-    $sql = "INSERT INTO personagens (nome, vida, mana, classe) VALUES (?, ?, ?, ?)";
-
+    // 2. Preparar a inserção (Igualzinho antes)
+    $sql = "INSERT INTO personagens (nome, classe, vida, mana) VALUES (?, ?, ?, ?)";
+    
     $stmt = $pdo->prepare($sql);
+    
+    // 3. Executar com as variáveis que vieram do formulário (não mais fixas!)
+    $stmt->execute([$nome, $classe, $vida, $mana]);
+    
+    // 4. Redirecionar para a lista (pra você ver o resultado)
+    header("Location: listar.php");
 
-    $stmt->execute([$nome, $vida, $mana, $classe]);
-
-    echo "<h1>🧙‍♂️ Personagem criado com sucesso!</h1>";
 } catch (PDOException $e) {
-    echo "Erro ao inserir: " . $e->getMessage();
+    echo "Erro: " . $e->getMessage();
 }
-
-
-$sql = "SELECT * FROM personagens";
-
-$stmt = $pdo->query($sql);
-
-$lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-echo "<h1>📋 Lista de Personagens do Banco:</h1>";
-
-foreach ($lista as $personagem) {
-    echo "<hr>";
-    echo "ID: " . $personagem['id'] . "<br>";
-    echo "Nome: <strong>" . $personagem['nome'] . "</strong><br>";
-    echo "Classe: " . $personagem['classe'] . "<br>";
-    echo "Vida: " . $personagem['vida'] . " | Mana: " . $personagem['mana'] . "<br>";
-}
+?>

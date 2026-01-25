@@ -1,19 +1,42 @@
 <?php
-
 require 'conexao_agenda.php';
 require_once 'contato.php';
 
 $meuContato = new Contato($pdo);
 
-//$meuContato->adicionar("Amatsu", "9269-6969");
+// --- AQUI ESTAVA FALTANDO! ---
+// A gente precisa encher a variável $lista antes de usar lá embaixo
 $lista = $meuContato->listar();
+// -----------------------------
+?>
 
-foreach ($lista as $contato) {
-    echo "Nome: " . $contato['nome']. "<br>";
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Agenda Telefônica</title>
+</head>
+<body>
+    <h1>Minha Agenda</h1>
 
-    echo "Telefone: " . $contato['numero_tel'] . "<br>";
+    <form action="adicionar.php" method="POST">
+        <input type="text" name="nome" placeholder="Nome da pessoa" required>
+        <input type="text" name="numero" placeholder="Número" required>
+        <button type="submit">Salvar</button>
+    </form>
 
-    echo "<hr>";
-}
-//print_r($lista);
-//echo "</pre>";
+    <hr>
+
+    <h2>Lista de Contatos</h2>
+
+    <?php
+    // Agora o $lista existe!
+    foreach ($lista as $contato) {
+        echo "Nome: " . $contato['nome'] . "<br>"; 
+        echo "Telefone: " . $contato['numero_tel'] . "<br>";
+        echo "<hr>";
+    }
+    ?>
+
+</body>
+</html>

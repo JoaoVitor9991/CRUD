@@ -25,4 +25,13 @@ class Contato {
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function deletarContato($id)
+    {
+        $sql= "DELETE FROM contatos where id = ?";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute([$id]);
+    }
 }

@@ -30,10 +30,15 @@ $lista = $meuContato->listar();
     <h2>Lista de Contatos</h2>
 
     <?php
-    // Agora o $lista existe!
+    
     foreach ($lista as $contato) {
         echo "Nome: " . $contato['nome'] . "<br>"; 
         echo "Telefone: " . $contato['numero_tel'] . "<br>";
+        
+        
+        echo "<a href='excluir.php?id=" . $contato['id'] . "'>[ Excluir ]</a>";
+        
+
         echo "<hr>";
     }
     ?>

@@ -12,7 +12,11 @@ abstract class Conta {
 
     public function depositar($valorDepositado)
     {
+        if($valorDepositado > 0){
         $this->saldo += $valorDepositado;
+        } else {
+            echo "Valor não permitido.";
+        }
     }
 
     public function sacar($valorSacado)

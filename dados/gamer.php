@@ -16,6 +16,12 @@ class Gamer {
     {
        $pdo = Conexao::conectar();
 
-       $sql = "INSERT INTO gamers (nome, nivel) values (?, ?)";
+       $sql = "INSERT INTO gamers (nome, nivel) values (:nome, :nivel)";
+
+       $stmt = $pdo->prepare($sql);
+
+       $stmt->bindValue(':nome', $this->nome);
+       $stmt->bindValue(':nivel', $this->nivel);
+       $stmt->execute();
     }
 }

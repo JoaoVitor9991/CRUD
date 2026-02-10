@@ -24,4 +24,14 @@ class Gamer {
        $stmt->bindValue(':nivel', $this->nivel);
        $stmt->execute();
     }
+
+    public static function listar(){
+
+        $pdo = Conexao::conectar();
+
+       $sql = "SELECT * from gamers";
+
+       $stmt = $pdo->query($sql);
+       return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

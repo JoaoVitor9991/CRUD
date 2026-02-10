@@ -7,7 +7,7 @@ class Conexao {
 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            echo "Conecto";
+           // echo "Conecto";
             return $pdo;
         } catch (PDOException $e){
             echo "deu merda " . $e->getMessage();

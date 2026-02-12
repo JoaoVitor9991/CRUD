@@ -34,4 +34,28 @@ class Gamer {
        $stmt = $pdo->query($sql);
        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function deletar($id){
+        $pdo = Conexao::conectar();
+
+        $sql = 'DELETE FROM gamers WHERE id = :id';
+
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+    } 
+
+    public static function editar($id, $nome, $nivel){
+        $pdo = Conexao::conectar();
+
+        $sql = 'UPDATE gamers SET nome = :nome, nivel = :nivel WHERE id = :id';
+
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':nome', $nome);
+        $stmt->bindValue(':nivel', $nivel);
+        $stmt->execute();
+    }
 }

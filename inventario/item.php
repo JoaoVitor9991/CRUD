@@ -35,4 +35,16 @@ class Item {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function deletar($id){
+        $pdo = Conexao::conectar();
+
+        $sql = 'DELETE from itens where id = :id';
+
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+    }
+
 }
